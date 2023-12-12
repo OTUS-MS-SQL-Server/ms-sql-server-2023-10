@@ -13,7 +13,7 @@ DECLARE @xmlDocument XML;
 -- !!! измените путь к XML-файлу
 SELECT @xmlDocument = BulkColumn
 FROM OPENROWSET
-(BULK 'C:\Users\KNKucherova\Documents\otus\ms-sql-server-2023-05\10-xml_json\demo\02-open_xml.xml', 
+(BULK 'C:\Users\KNKucherova\Documents\otus\ms-sql-server-2023-10\10-xml_json\demo\02-open_xml.xml', 
  SINGLE_CLOB)
 AS data;
 
@@ -29,7 +29,7 @@ SELECT @docHandle AS docHandle;
 SELECT *
 FROM OPENXML(@docHandle, N'/Orders/Order')
 WITH ( 
-	[ID] INT  '@ID',
+	[ID] INT  '@Id',
 	[OrderNum] INT 'OrderNumber',
 	[CustomerNum] INT 'CustomerNumber',
 	[City] NVARCHAR(10) 'Address/City',

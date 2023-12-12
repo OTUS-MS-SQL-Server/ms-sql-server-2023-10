@@ -35,6 +35,16 @@ FOR XML RAW('City'), ROOT('Cities'), ELEMENTS;
 --------------------------
 -- иерархия задается через алиасы колонок 
 -- сравним представление одних и тех же данных в JSON и XML
+SELECT TOP 3
+    SupplierID,
+    SupplierName,
+    SupplierCategoryName,
+    PrimaryContact,
+    AlternateContact,
+    WebsiteURL,
+    CityName
+FROM Website.Suppliers
+FOR JSON PATH, INCLUDE_NULL_VALUES;
 
 -- FOR JSON PATH
 SELECT TOP 3

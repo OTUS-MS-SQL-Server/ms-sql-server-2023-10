@@ -141,8 +141,7 @@ GO
 
 -- обновляем данные в таблице
 UPDATE Warehouse.StockItems
-SET CustomFields = JSON_MODIFY(CustomFields, '$.Tags[1]', 'Super SoundA'),
-   [ValidFrom] = GETDATE()
+SET CustomFields = JSON_MODIFY(CustomFields, '$.Tags[1]', 'Super SoundA')
 WHERE StockItemID = 63;
 GO
 

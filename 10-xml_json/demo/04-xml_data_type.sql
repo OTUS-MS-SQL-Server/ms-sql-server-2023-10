@@ -18,6 +18,9 @@ GO
 -- Так будет ошибка. Почему?
 INSERT #table1 VALUES('<b><i>abc</b></i>');
 INSERT #table1 VALUES('<person>abc</Person>');
+
+INSERT #table1 VALUES('<b><i>abc</i></b>');
+
 GO
 
 SELECT xmlcol FROM #table1;
@@ -117,7 +120,7 @@ USE WideWorldImporters;
 DECLARE @x XML;
 SET @x = ( 
   SELECT * FROM OPENROWSET
-  (BULK 'C:\Users\KNKucherova\Documents\OTUS\ms-sql-server-2023-05\10-xml_json\demo\04-xml_data_type.xml',
+  (BULK 'C:\Users\KNKucherova\Documents\OTUS\ms-sql-server-2023-10\10-xml_json\demo\04-xml_data_type.xml',
    SINGLE_CLOB) AS d);
 
 -- value(XQuery/XPath, Type) - возвращает скалярное (единичное) значение
@@ -144,8 +147,10 @@ GO
 -- Можно использовать вместо OPENXML
 
 DECLARE @x XML;
-SET @x = (SELECT * FROM OPENROWSET (BULK 'C:\Users\KNKucherova\Documents\OTUS\ms-sql-server-2023-05\10-xml_json\demo\04-xml_data_type.xml', SINGLE_BLOB)  AS d);
+SET @x = (SELECT * FROM OPENROWSET (BULK 'C:\Users\KNKucherova\Documents\OTUS\ms-sql-server-2023-10\10-xml_json\demo\04-xml_data_type.xml', SINGLE_BLOB)  AS d);
 
+--@ атрибут
+--без @ элемент 
 SELECT  
   t.Supplier.value('(@Id)[1]', 'int') AS [Id],
   t.Supplier.value('(Name)[1]', 'varchar(100)') AS [SupplierName],

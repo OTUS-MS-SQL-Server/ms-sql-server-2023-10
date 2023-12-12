@@ -10,7 +10,7 @@ DECLARE @json NVARCHAR(max);
 
 SELECT @json = BulkColumn
 FROM OPENROWSET
-(BULK 'C:\Users\KNKucherova\Documents\otus\ms-sql-server-2023-10\10-xml_json\demo\03-open_json.json', 
+(BULK 'C:\Users\KNKucherova\Documents\otus\ms-sql-server-2023-10\10-xml_json\demo\03-open_json_array.json', 
  SINGLE_CLOB)
 AS data;
 
@@ -19,7 +19,7 @@ SELECT @json AS [@json];
 
 -- OPENJSON Явное описание структуры
 SELECT *
-FROM OPENJSON (@json, '$.Suppliers')
+FROM OPENJSON (@json, '$')
 WITH (
     Id          INT,
     Supplier    NVARCHAR(100)   '$.SupplierInfo.Name',    
@@ -29,7 +29,7 @@ WITH (
 
 -- OPENJSON Явное описание структуры
 SELECT *
-FROM OPENJSON (@json, '$.Suppliers')
+FROM OPENJSON (@json, '$')
 WITH (
     Id          INT,
     Supplier    NVARCHAR(100)   '$.SupplierInfo.Name',    
@@ -42,7 +42,7 @@ WITH (
 
 SELECT * FROM OPENJSON(@json);
 
-SELECT * FROM OPENJSON(@json, '$.Suppliers');
+SELECT * FROM OPENJSON(@json, '$');
 
 -- Type:
 --    0 = null
