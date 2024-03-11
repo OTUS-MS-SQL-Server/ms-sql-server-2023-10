@@ -147,7 +147,7 @@ AS
 	IF NOT EXISTS (SELECT * FROM Warehouse.StockItems WHERE StockItemID = @StockItemID)
 	BEGIN
 		DECLARE @message NVARCHAR(50) = CONCAT(N'Не найден StockItemID = ', @StockItemID);
-		RAISERROR (@message, 11, 1); -- <<< severenity поменяли c 11 на 10;
+		RAISERROR (@message, 11, 1) -- <<< severenity поменяли c 11 на 10;
 	END
 	ELSE
 	BEGIN

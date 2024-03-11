@@ -25,7 +25,7 @@ CREATE OR ALTER PROCEDURE Warehouse.ChangeStockItemUnitPrice
     @NewUnitPrice DECIMAL(18,2)
 AS
     SET NOCOUNT ON;
-
+	SET XACT_ABORT OFF;
     -- Проверку на существование StockItemID специально убрали, 
     -- т.к. добавили транзакцию и все должно быть атомарно и при ошибке ROLLBACK.
 
@@ -56,7 +56,7 @@ AS
             (StockItemID, UnitPrice, DealDescription, StartDate, EndDate, LastEditedBy)
             VALUES(@StockItemID, @NewUnitPrice, 'description', SYSDATETIME(), DATEADD(d, 10, GETDATE()), 1);
 
-		PRINT '1000 ddd'
+		--PRINT '1000 ddd'
     COMMIT;
 GO
 -- Все в транзакции, поэтому, вроде как, при ошибке должно все откатиться
@@ -143,7 +143,7 @@ AS
 GO
 
 -- Посмотрим, что в таблицах
-SELECT * FROM Warehouse.Logs; -- 4
+SELECT * FROM Warehouse.Logs; -- 2
 SELECT * FROM Sales.SpecialDeals; -- 3 
 
 -- Не существующий StockItemID

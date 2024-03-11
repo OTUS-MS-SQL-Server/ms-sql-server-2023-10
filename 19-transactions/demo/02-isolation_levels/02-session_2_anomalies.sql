@@ -2,12 +2,12 @@ USE WideWorldImporters;
 
 -- Возвращаем БД в исходное сосотяние (для работы демо)
 UPDATE Application.People
-SET PhoneNumber = '(415) 555-0102'
+SET PhoneNumber = '(415) 555-0102'--
 WHERE FullName = 'Kayla Woodcock';
 GO
 
 DELETE FROM [Application].[People] 
-WHERE FullName = 'Kayla Woodcock 222'
+WHERE FullName = 'Kayla Woodcock 333'
 GO
 
 -- ----------------------
@@ -67,4 +67,17 @@ ROLLBACK;
 SELECT PersonId, FullName, PhoneNumber
 FROM Application.People
 WHERE FullName like 'Kayla Woodcock%';
+
+INSERT INTO [Application].[People] 
+([FullName],[PhoneNumber],[PreferredName],[IsPermittedToLogon], [IsExternalLogonProvider], [IsSystemUser],[IsEmployee],[IsSalesperson],[LastEditedBy])
+VALUES 
+('333','(000) 123-45-67', 'Kayla Woodcock 333', 1, 1, 1, 1, 1,1);
+
+update [Application].[People]
+SET [FullName] = 'Kayla Woodcock 333'
+WHERE [FullName] = '333';
+
+update [Application].[People]
+SET [FullName] = '111'
+WHERE [FullName] = 'Kayla Woodcock 333';
 	

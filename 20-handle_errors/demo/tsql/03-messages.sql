@@ -19,7 +19,8 @@ DECLARE @ErrorNum INT;
 SELECT 1 / 0;
 
 SET @ErrorNum = @@ERROR;
-IF @ErrorNum = 0
+Select @ErrorNum
+IF @@ERROR = 0
 BEGIN
     PRINT N'ошибки нет';
 END
@@ -66,5 +67,6 @@ SELECT message_id, language_id, severity, is_event_logged, [text]
 FROM sys.messages
 WHERE message_id = 50004;
 
+EXEC sp_dropmessage @msgnum=50004, @lang = 'us_english';
 EXEC sp_dropmessage @msgnum=50004;
 GO
